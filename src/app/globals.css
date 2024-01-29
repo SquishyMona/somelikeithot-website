@@ -102,23 +102,87 @@ nav {
   text-align: right;
   position: sticky;
   font-family: Quicksand;
+  display: flex;
+  max-height: 60px;
+  transition: all 1s ease-in-out;
 }
 
 nav .slihText {
   display: block;
   color: rgb(243, 212, 224);
   float: left;
-  padding: 14px;
+  padding: 17px 5px;
   text-decoration: none;
+  font-size: 20px;
 }
 
 nav img {
-  width: 48px;
+  width: 60px;
   float: left;
   opacity: initial;
 }
 
+.homelink {
+  display: flex;
+  max-width: 221px;
+  margin-right: auto;
+}
+
+.hamburger-lines {
+  display: none;
+  height: 26px;
+  width: 32px;
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+ .hamburger-lines .line {
+  display: none;
+  height: 3px;
+  width: 70%;
+  border-radius: 10px;
+  background: #ffffff;
+  margin: 4px 0 5px 0;
+}
+
+ .line .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+ .line .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+
+ .line .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
 @media screen and (max-width: 1095px) {
+  .hamburger-lines .line {
+    display: block;
+  }
+
+  .hamburger-lines {
+    display: block;
+  }
+
+  .homelink {
+    width: 100%;
+    margin: auto;
+  }
+
+  nav {
+    flex-direction: column;
+    height: 60px;
+    max-height: none;
+  }
+
   nav a {
       display: none;
   }
@@ -131,36 +195,33 @@ nav img {
     width: 48px;
   }
 
-  nav a.icon i.fa.fa-bars {
-      position: relative;
-      left: -16px;
-      bottom: -16px;
-  }
-
   nav li:hover {
       background-color: rgb(120, 89, 102);
   }
 
-  nav.responsive ul a {
-      display: block;
-      text-align: left;
+  nav ul {
+    position: relative;
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+    top: -100vh;
+    transition: all 1s ease-in-out;
+    z-index: 5;
   }
 
-  nav.responsive li {
+  nav ul a {
       display: block;
-      text-align: left;
+      width: 100%;
   }
 
-  nav.responsive li:hover {
+  nav li {
+      text-align: center;
+      margin: 0;
+      width: 100%;
+  }
+
+  nav li:hover {
       background-color: rgb(84, 63, 71);;
-  }
-
-  nav.responsive ul {
-      float: left;
-      position: relative;
-      left: -243px;
-      top: 48px;
-      padding: 0px;
   }
 }
 
@@ -289,21 +350,27 @@ body {
 }
 
 ul {
-  display: block;
+  display: flex;
+  align-items: center;
   margin: 0;
   float: right;
+  height: 60px;
 }
 
 li {
-  display: inline-block;
+  display: flex;
+  height: 60px;
   padding: 14px;
   transition: 0.3s;
   -webkit-transition: 0.3s;
+  align-items: center;
 }
 
 li a {
   color: rgb(243, 212, 224);
   text-decoration: none;
+  font-size: 18px;
+  text-align: center;
 }
 
 li:hover {

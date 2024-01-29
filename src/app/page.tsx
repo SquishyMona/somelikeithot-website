@@ -3,93 +3,54 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+      <div className="header">   
+          <h1>Some Like It Hot</h1>
+          <h2>Fredonia&apos;s Premier All Female A Cappella Group</h2>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="slider">
+          <span id="slide-1"></span>
+          <span id="slide-2"></span>
+          <span id="slide-3"></span>
+          <span id="slide-4"></span>
+          <span id="slide-5"></span>
+          <span id="slide-6"></span>
+          <span id="slide-7"></span>
+          <span id="slide-8"></span>
+          <span id="slide-9"></span>
+          <span id="slide-10"></span>
+          <span id="slide-11"></span>
+          <span id="slide-12"></span>
+          <div className="image-container">
+              <img src="Images/slide2.jpg" className="slide" />
+              <img src="Images/slide1.jpg" className="slide" />
+              <img src="Images/slide3.jpg" className="slide" />
+              <img src="Images/slide4.jpg" className="slide" />
+              <img src="Images/slide5.jpg" className="slide" />
+              <img src="Images/slide6.jpg" className="slide" /> 
+              <img src="Images/slide7.jpg" className="slide" />
+              <img src="Images/slide8.jpg" className="slide" />
+              <img src="Images/slide9.jpg" className="slide" />
+              <img src="Images/slide10.jpeg" className="slide" />
+              <img src="Images/slide11.jpg" className="slide" />
+              <img src="Images/slide12.jpg" className="slide" />
+          </div>  
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <div className="buttons">
+          <a href="#slide-1">&hearts;</a>
+          <a href="#slide-2">&hearts;</a>
+          <a href="#slide-3">&hearts;</a>
+          <a href="#slide-4">&hearts;</a>
+          <a href="#slide-5">&hearts;</a>
+          <a href="#slide-6">&hearts;</a>
+          <a href="#slide-7">&hearts;</a>
+          <a href="#slide-8">&hearts;</a>
+          <a href="#slide-9">&hearts;</a>
+          <a href="#slide-10">&hearts;</a>
+          <a href="#slide-11">&hearts;</a>
+          <a href="#slide-12">&hearts;</a>
+      </div>  
+    </>  
   );
 }

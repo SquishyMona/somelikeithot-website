@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 //import { AuthContext, useAuthContext } from "@/context/AuthContext"
@@ -7,12 +7,12 @@ import Link from "next/link";
 export default function Navigation() {
     return (
         <>
-            <nav id="navbar" style="max-height: 48px;" class="nav">
-                <a class="icon" href="javascript:void(0)" onclick="hamburgerClick()"></a>
-                    <i class="fa fa-bars"></i>
+            <nav id="navbar" style={{maxHeight: '48px'}}>
+                <a className="icon"  >
+                    <i className="fa fa-bars"></i>
                 </a>
-                <img src="Images/SLIHLogo.png">
-                <a class="slihText" href="index.html" style="display: inline-block; margin: 0;">Some Like It Hot</a>
+                <img src="/Images/SLIHLogo.png"></img>
+                <a className="slihText" href="index.html" style={{display: 'inline-block', margin: '0'}}>Some Like It Hot</a>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about-us.html">About Us</a></li>

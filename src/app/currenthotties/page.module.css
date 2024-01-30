@@ -1,0 +1,112 @@
+.hottiecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    margin-top: 20px;
+}
+
+.hottie {
+    display: flex;
+    width: 100vw;
+    margin: auto;
+    margin-top: 0;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+.hottie img {
+    align-self: center;
+    width: 50%;
+    margin: auto;
+    transition: all 0.3s ease-in-out;
+    -webkit-mask-image: linear-gradient(45deg,#000 25%,rgba(0,0,0,.2) 50%,#000 75%);
+    mask-image: linear-gradient(45deg,#000 25%,rgba(0,0,0,.2) 50%,#000 75%);
+    -webkit-mask-size: 800%;
+    mask-size: 800%;
+    -webkit-mask-position: 0;
+    mask-position: 0;
+}
+
+.hottie img:hover {
+    transform: scale(1.03);
+    transition: all .3s ease-in-out,-webkit-mask-position .6s ease-in-out;
+    -webkit-mask-position: 120%;
+    mask-position: 120%;
+    opacity: 1;
+}
+
+.details {
+    width: 100%;
+    margin: auto;
+    font-family: Quicksand;
+    font-size: 5vw;
+}
+
+.details h2 {
+    font-size: 7vw;
+    font-family: OleoScript;
+    margin-bottom: 10px;
+}
+
+.details h2 a {
+    color: white;
+    text-decoration: none;
+}
+
+.eboard {
+    color: rgb(232, 56, 43);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 600px) {
+    .hottie {
+        width: 50%;
+    }
+    .hottie img {
+        width: 75%;
+    }
+
+    .details {
+        font-size: 3vw;
+    }
+
+    .details h2 {
+        font-size: 4vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .hottie {
+        width: 33%;
+    }
+    .hottie img {
+        width: 50%;
+    }
+
+    .details {
+        font-size: 2vw;
+    }
+
+    .details h2 {
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (min-width: 1366px) {
+    .hottie {
+        width: 25%;
+    }
+    .hottie img {
+        width: 70%;
+    }
+
+    .details {
+        font-size: 1.5vw;
+    }
+
+    .details h2 {
+        font-size: 2vw;
+    }
+}

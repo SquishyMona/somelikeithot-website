@@ -32,7 +32,7 @@ export default function Navigation() {
                     <span className="line line3"></span>
                 </div>  
                 <div className="homelink">
-                    <img src="/Images/SLIHLogo.png"></img>
+                    <img src="/Images/logo.png"></img>
                     <Link className="slihText" href="/" style={{display: 'inline-block', margin: '0'}}>Some Like It Hot</Link>
                 </div>
                 <ul id="dropdown">

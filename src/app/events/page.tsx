@@ -1,8 +1,40 @@
-import 
+"use client";
+
+import { useState, useEffect } from 'react'
+import { getDocs, collection } from 'firebase/firestore'
+import { firestore_db } from '@/firebase/config'
 import styles from './page.module.css'
 
+const dbInstance = collection(firestore_db, 'events');
+
+function Event({title, time, location, description, livelink, img}) {
+    return (
+        <div className={styles.event}>
+            <img src={img}></img>
+            <div className={styles.details}>
+                <h2>{title}</h2><br/>
+                <h3>{time}</h3>
+                <h3>{location}</h3>
+                <br/><p>{description}</p>
+                <br/><a href={livelink}>Watch the livestream</a>
+            </div>
+        </div>
+    )
+}
 
 export default function Events() {
+    const [events, setEvents] = useState<{ id: string; }[]>([]);
+    const getEvents = async () => {
+        getDocs(dbInstance).then((data) => {
+            setEvents(data.docs.map((doc) => {
+                return {...doc.data(), id: doc.id}
+            }));
+        })
+    }
+    useEffect(() => {
+        getEvents();
+    }, []);
+
     return (
         <>
             <div className="header">   
@@ -10,17 +42,15 @@ export default function Events() {
             </div>
 
             <div className={styles.container}>
-                <div className={styles.event}>
-                    <img src="/Images/SLIHLogo.png"></img>
-                    <div className={styles.details}>
-                        <h2>Acafest</h2><br/>
-                        <h3>April 16th @ 7PM</h3>
-                        <h3>McEwen Hall 209</h3>
-                        <br/><p>
-                            Some Like It Hot presents our annual Acafest invitational, with performances from all our Fredonia groups, as well as RIT's Vocal Accent and UB's Buffalo Chips!
-                        </p>
-                    </div>
-                </div>
+                {events.map((event) => {
+                    return <Event 
+                    title={event.title}
+                    time={event.datetime}
+                    location={event.location}
+                    description={event.description}
+                    livelink={event.livelink}
+                    img={event.logo} />
+                })}
             </div>
         </>
     )

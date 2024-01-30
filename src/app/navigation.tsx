@@ -38,7 +38,7 @@ export default function Navigation() {
                 <ul id="dropdown">
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="/about">About Us</Link></li>
-                    <li><Link href="/news">News</Link></li>
+                    <li><Link href="/events">Events</Link></li>
                     <li><Link href="/currenthotties">Current Hotties</Link></li>
                     <li><Link href="/repertoire">Repertoire</Link></li>
                     <li><Link href="/alumni">Alumni</Link></li>

@@ -1,0 +1,64 @@
+.contact {
+    text-align: center;
+    font-family: Quicksand;
+    color: white;
+    padding: 4%;
+}
+
+.contact p {
+    font-size: 4vw;
+}
+
+.contact a {
+    color: rgb(232, 56, 43);
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    margin: auto;
+}
+
+.socials a {
+    margin: 20px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 33.33%;
+}
+
+.socials img {
+    width: 70%;
+}
+
+@media screen and (min-width: 600px) {
+    .socials img {
+        width: 70%;
+    }
+
+    .socials {
+        width: 50%;
+        align-self: center;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .socials img {
+        width: 50%;
+    }
+
+    .contact p {
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (min-width: 1366px) {
+    .socials img {
+        width: 30%;
+    }
+
+    .contact p {
+        font-size: 1.5vw;
+    }
+}

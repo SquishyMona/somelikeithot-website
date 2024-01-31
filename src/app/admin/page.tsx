@@ -47,14 +47,11 @@ export default function Admin() {
                         <h3>Hotties</h3>
                         <button onClick={() => router.push('/admin/hotties/manage')}>Manage</button>
                         <button onClick={() => router.push('/admin/hotties/add')}>Add</button>
-                        <button onClick={() => router.push('/admin/hotties/convertalumni')}>Convert to Alumni</button>
-                        <button onClick={() => router.push('/admin/hotties/converteboard')}>Convert to Eboard</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Repertoire</h3>
                         <button onClick={() => router.push('/admin/repertoire/manage')}>Manage</button>
                         <button onClick={() => router.push('/admin/repertoire/add')}>Add</button>
-                        <button onClick={() => router.push('/admin/repertoire/retire')}>Retire Song</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Media</h3>

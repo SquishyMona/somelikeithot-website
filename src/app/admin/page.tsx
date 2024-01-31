@@ -34,36 +34,36 @@ export default function Admin() {
                         <button onClick={() => router.push('/admin/editprofile')}>Edit Profile</button>
                         <button onClick={() => router.push('/admin/changepassword')}>Change Password</button>
                         <button onClick={() => signOut(getAuth()).then(router.push('/'))}>Sign Out</button>
-                        <button>Admin Guide</button>
+                        <button onClick={() => router.push('/admin/adminguide')}>Admin Guide</button>
                     </div>
                 </div>
                 <div className={styles.dashboard}>
                     <div className={styles.actions}>
                         <h3>Events</h3>
-                        <button>Manage</button>
-                        <button>Add</button>
+                        <button onClick={() => router.push('/admin/events/manage')}>Manage</button>
+                        <button onClick={() => router.push('/admin/events/add')}>Add</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Hotties</h3>
-                        <button>Manage</button>
-                        <button>Add</button>
-                        <button>Convert to Alumni</button>
-                        <button>Convert to Eboard</button>
+                        <button onClick={() => router.push('/admin/hotties/manage')}>Manage</button>
+                        <button onClick={() => router.push('/admin/hotties/add')}>Add</button>
+                        <button onClick={() => router.push('/admin/hotties/convertalumni')}>Convert to Alumni</button>
+                        <button onClick={() => router.push('/admin/hotties/converteboard')}>Convert to Eboard</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Repertoire</h3>
-                        <button>Manage</button>
-                        <button>Add</button>
-                        <button>Retire Song</button>
+                        <button onClick={() => router.push('/admin/repertoire/manage')}>Manage</button>
+                        <button onClick={() => router.push('/admin/repertoire/add')}>Add</button>
+                        <button onClick={() => router.push('/admin/repertoire/retire')}>Retire Song</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Media</h3>
-                        <button>Manage</button>
-                        <button>Add</button>
+                        <button onClick={() => router.push('/admin/media/manage')}>Manage</button>
+                        <button onClick={() => router.push('/admin/media/add')}>Add</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Slides</h3>
-                        <button>Manage</button>
+                        <button onClick={() => router.push('/admin/slides')}>Manage</button>
                     </div>
                 </div>
             </>

@@ -165,7 +165,7 @@ nav img {
   transition: transform 0.4s ease-in-out;
 }
 
-@media screen and (max-width: 1095px) {
+@media screen and (max-width: 1174px) {
   .hamburger-lines .line {
     display: block;
   }

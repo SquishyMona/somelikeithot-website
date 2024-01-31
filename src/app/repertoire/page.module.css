@@ -1,0 +1,92 @@
+.currentrep {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    text-align: center;
+}
+
+.song {
+    width: 100%;
+    padding: 2vw;
+    border-radius: 10%;
+}
+
+.rep {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 20px;
+
+}
+
+.rep h2 {
+    text-align: center;
+    color: white;
+    font-family: OleoScript;
+    max-width: 100%;
+    line-break: auto;
+    font-size: 50px;
+}
+
+.rep h3 {
+    text-align: center;
+    color: white;
+    font-family: Quicksand;
+    max-width: 100%;
+    line-break: auto;
+    font-size: 25px;
+}
+
+.pastrep {
+    text-align: center;
+    color: white;
+    font-family: Quicksand;
+    max-width: 100%;
+    line-break: auto;
+}
+
+@media screen and (min-width: 600px) {
+    .song {
+        width: 42.5vw;
+        border-radius: 15%;
+    }
+
+    .rep h2 {
+        font-size: 30px;
+    }
+
+    .rep h3 {
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .song {
+        width: 26.7vw;
+        border-radius: 20%;
+    }
+
+    .rep h2 {
+        font-size: 30px;
+    }
+
+    .rep h3 {
+        font-size: 15px;
+    }
+}
+    
+@media screen and (min-width: 1366px) {
+    .song {
+        width: 23.5vw;
+        border-radius: 20%;
+    }
+
+    .rep h2 {
+        font-size: 40px;
+    }
+
+    .rep h3 {
+        font-size: 20px;
+    }
+}

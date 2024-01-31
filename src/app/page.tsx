@@ -1,7 +1,26 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from 'react'
+import { getDocs, collection, orderBy, query } from 'firebase/firestore'
+import { firestore_db } from '@/firebase/config'
 import styles from "./page.module.css";
 
 export default function Home() {
+  const [slides, setSlides] = useState<{ id: string; }[]>([]);
+  const getSlides = async () => {
+    const ref = collection(firestore_db, "slides");
+    const q = query(ref, orderBy("slidenum"));
+    getDocs(q).then((data) => {
+      setSlides(data.docs.map((doc) => {
+        return {...doc.data(), id: doc.id}
+      }));
+    })
+  }
+
+  useEffect(() => {
+    getSlides();
+  }, []);
+
   return (
     <>
       <div className="header">   
@@ -23,18 +42,9 @@ export default function Home() {
           <span id="slide-11"></span>
           <span id="slide-12"></span>
           <div className="image-container">
-              <img src="Images/slide2.jpg" className="slide" />
-              <img src="Images/slide1.jpg" className="slide" />
-              <img src="Images/slide3.jpg" className="slide" />
-              <img src="Images/slide4.jpg" className="slide" />
-              <img src="Images/slide5.jpg" className="slide" />
-              <img src="Images/slide6.jpg" className="slide" /> 
-              <img src="Images/slide7.jpg" className="slide" />
-              <img src="Images/slide8.jpg" className="slide" />
-              <img src="Images/slide9.jpg" className="slide" />
-              <img src="Images/slide10.jpeg" className="slide" />
-              <img src="Images/slide11.jpg" className="slide" />
-              <img src="Images/slide12.jpg" className="slide" />
+            {slides.map((slide) => {
+              return <img key={slide.id} src={slide.photo} className="slide" />
+            })}
           </div>  
       </div>
       <div className="buttons">

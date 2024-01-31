@@ -7,14 +7,13 @@ import styles from './page.module.css'
 
 const dbInstance = collection(firestore_db, 'rep');
 
-function Song({title, introduced, arranger}) {
+function Song({title, introduced, arranger, photo}) {
     return (
         <div className={styles.rep}>
-            <div className={styles.details}>
-                <h2>{title}</h2><br/>
-                <h3>{introduced}</h3>
-                <h3>{arranger}</h3>
-            </div>
+            <img className={styles.song} src={photo} />
+            <h2>{title}</h2><br/>
+            <h3>Introduced in {introduced}</h3>
+            <h3>Arranged by {arranger}</h3>
         </div>
     )
 }
@@ -50,22 +49,30 @@ export default function Repertoire() {
                 <h1>Repertoire</h1>
             </div>
 
-            <div className={styles.container}>
+            <div className={styles.currentrep}>
                 {rep.map((rep) => {
                     return <Song 
+                    photo={rep.photo}
                     title={rep.title}
                     introduced={rep.introduced}
                     arranger={rep.arranger} />
                 })}
             </div>
 
-            <h1 className="category" style={{marginTop: '20px'}}>Retired Songs</h1>
-            <div className={styles.container}>
+            <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1>
+            <div className={styles.currentrep} style={{marginTop: '20px', marginBottom: '30px'}}>
                 {retired.map((rep) => {
-                    return <Song 
-                    title={rep.title}
-                    introduced={rep.introduced}
-                    arranger={rep.arranger} />
+                    return ( 
+                        <>
+                            <div className={styles.retired}>
+                                <span style={{fontSize: '20px', textAlign: 'center', fontWeight: 'bold', fontFamily: 'Quicksand'}}>
+                                    {rep.title}
+                                </span>
+                                <span>: Introduced in&nbsp;{rep.introduced}, arranged by {rep.arranger} </span>
+                                <br/>
+                            </div>
+                        </>
+                    )
                 })}
             </div>
         </>

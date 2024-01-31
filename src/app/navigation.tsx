@@ -1,17 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-//import { AuthContext, useAuthContext } from "@/context/AuthContext"
+import { AuthContext, useAuthContext } from "@/context/authcontext"
 import Link from "next/link";
 
 export default function Navigation() {
+    const { user } = useAuthContext();
     const [isOpen, setIsOpen] = useState(true);
     const toggleMenu = () => {
           setIsOpen(!isOpen);
           console.log(isOpen);
           if (isOpen) {
             document.getElementById('dropdown').style.top = '0';
-            if (false) {
+            if (user) {
               document.getElementById('navbar').style.height = '660px';
             }
             else {
@@ -25,6 +26,7 @@ export default function Navigation() {
       }
   
     return (
+        <AuthContext.Provider value={{ user }}>
             <nav id="navbar">
                 <div className="hamburger-lines" onClick={toggleMenu}>
                     <span className="line line1"></span>
@@ -45,7 +47,11 @@ export default function Navigation() {
                     <li><Link href="/media">Media</Link></li>
                     <li><Link href="https://www.bonfire.com/store/some-like-it-hot/" target="_blank">Merch</Link></li>
                     <li><Link href="/contact">Contact</Link></li>
+                    {
+                        user ? <li><Link href="/admin">Admin</Link></li> : null
+                    }
                 </ul>
             </nav>
+        </AuthContext.Provider>
     );
 }

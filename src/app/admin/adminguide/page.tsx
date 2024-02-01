@@ -50,8 +50,7 @@ export default function AdminHelp() {
                         <h3>What is my Profile?</h3>
                         <p>
                             Your profile consists of your email, display name, and photo. Your
-                            email is only viewable by you. Your display name and photo will be
-                            displayed next to posts you create. Your profile is also used to
+                            email is only viewable by you. Your profile is used to
                             identify you when you login to the dashboard and will be logged when
                             you make changes to the website.
                         </p>
@@ -99,8 +98,8 @@ export default function AdminHelp() {
                             regardless of type, will have a name, join year, photo, and a list of solos,
                             if applicable. Eboard members will also have a position assosciated with them.
                             Alumni members will have all these fields, with any past eboard position they 
-                            held listed as well. You can convert any member to an eboard role or alumni, 
-                            but not the reverse way.
+                            held listed as well. You can convert any member to an eboard role or alumni, and
+                            vise versa.
                             
                         </p>
                         <h3>Managing Hotties</h3>
@@ -112,10 +111,12 @@ export default function AdminHelp() {
                         </p>
                         <h3>Converting a Hottie</h3>
                         <p>
-                            To convert a member to an alumni or eboard member, click the &quot;Convert to Alumni&quot;
-                            or &quot;Convert to Eboard&quot; button on the dashboard. From here, you can select a member
-                            to convert, fill in the applicable information, and they will be moved to the 
-                            appropriate section of the website.
+                            To convert a member to an alumni or eboard member, go to the &quot;Manage&quot; page
+                            and click the &quot;Change Alumni Status&quot; button under the person you&apos;d like to
+                            convert. If you&apos;d like to change an Alumni back to a member, follow the same steps. If 
+                            you&apos;d like to assign an eboard position to a member, simply edit the position field 
+                            under the member you&apos;d like to assign. If you&apos;d like to remove a position, simply remove 
+                            the position from the field and leave it blank.
                         </p>
                         <h2>Repertoire</h2>
                         <h3>What is Repertoire?</h3>
@@ -132,22 +133,8 @@ export default function AdminHelp() {
                         </p>
                         <h3>Retiring a Song</h3>
                         <p>
-                            To retire a song, click the &quot;Retire Song&quot; button on the dashboard. From here, you
-                            can select a song to retire, and it will be moved to the retired section of the
-                            repertoire page.
-                        </p>
-                        <h2>Media</h2>
-                        <h3>What is Media?</h3>
-                        <p>
-                            The Media page is where you can feature photos of the group. This page also
-                            will have the latest upload on the SLIH YouTube channel on the top of the
-                            page.
-                        </p>
-                        <h3>Managing Media</h3>
-                        <p>
-                            To manage the media section, click the &quot;Manage&quot; button under the Media category.
-                            From here, you&apos;ll see a list of all the photos currently on the website. You can
-                            add and remove items on this page.
+                            To change a song&apos;s retirement status, click the &quot;Change Retirement Status&quot; button
+                            under the song you&apos;d like to retire.
                         </p>
                         <h2>Slides</h2>
                         <h3>What are Slides?</h3>
@@ -162,14 +149,6 @@ export default function AdminHelp() {
                             the Slides category. From here, you&apos;ll see a list of all the slides currently
                             on the website. You can edit a slide by uploadng a new photo into any of the slots.
 
-                        </p>
-                        <h2>Features in Progress</h2>
-                        <p>
-                            In the future, you&apos;ll also be able to edit information about a specific brother 
-                            after they&apos;ve been added to the website. When these features are added, this page 
-                            will be updated with instructions on how to use them. If you&apos;d like any features
-                            added, or would like a specific aspect of the website to become editable, please
-                            let the website admins know.
                         </p>
                     </div>
                 </div>

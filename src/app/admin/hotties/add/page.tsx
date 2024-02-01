@@ -16,10 +16,12 @@ export default function AddHottie() {
     const [photo, setImg] = useState(null);
     const [solos, setSolos] = useState("");
     const [joinyear, setJoined] = useState("");
-    const [alumni, setAlumni] = useState("");
+    const [alumni, setAlumni] = useState(null);
 
     const addHottie = async () => {
         const storage = getStorage();
+
+        const isAlumni = alumni === "on" ? true : false;
 
         const colRef = collection(firestore_db, 'slihsters');
         await addDoc(colRef, {
@@ -27,7 +29,7 @@ export default function AddHottie() {
             eboard: eboard,
             solos: solos,
             joinyear: joinyear,
-            alumni: alumni,
+            alumni: isAlumni,
         }).then((doc) => {
             const storageRef = ref(storage, `slihsters/${doc.id}`);
             uploadBytes(storageRef, photo).then((snapshot) => {
@@ -54,18 +56,18 @@ export default function AddHottie() {
                 </div>
 
                 <div className={styles.contentForm}>
-                    <p>Name</p>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                    <p>Position</p>
-                    <input type="text" value={eboard} onChange={(e) => setPosition(e.target.value)} />
                     <p>Image</p>
                     <input type="file" onChange={(e) => setImg(e.target.files[0])} />
-                    <p>Solos</p>
-                    <input type="text" value={solos} onChange={(e) => setSolos(e.target.value)} />
+                    <p>Name</p>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                     <p>Joined</p>
                     <input type="text" value={joinyear} onChange={(e) => setJoined(e.target.value)} />
+                    <p>Solos</p>
+                    <input type="text" value={solos} onChange={(e) => setSolos(e.target.value)} />
+                    <p>Position</p>
+                    <input type="text" value={eboard} onChange={(e) => setPosition(e.target.value)} />
                     <p>Alumni</p>
-                    <input type="text" value={alumni} onChange={(e) => setAlumni(e.target.value)} />
+                    <input type="checkbox" value={alumni} onChange={(e) => setAlumni(e.target.value)} />
                     <button onClick={addHottie}>Add</button>
                 </div>
             </>

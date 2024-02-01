@@ -17,7 +17,7 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
 
     const [newName, setNewName] = useState(name);
     const [newPosition, setNewPosition] = useState(position);
-    const [newImg, setNewImg] = useState(img);
+    const [newImg, setNewImg] = useState(null);
     const [newSolos, setNewSolos] = useState(solos);
     const [newJoined, setNewJoined] = useState(joined);
     const [newAlumni, setNewAlumni] = useState(alumni);
@@ -27,32 +27,42 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
         const storageRef = getStorage(firebase_app);
         const logoRef = ref(storageRef, `slihsters/${hottieID}`);
         const docSnap = await getDoc(doc(colRef, hottieID));
-        if (document.getElementById('logo').files.length === 0 ){
-            var imgURL = docSnap.data().photo;
-        }
-        else {
-            const file = document.getElementById('logo').files[0];
-            const snapshot = await uploadBytes(logoRef, file);
-            var imgURL = await getDownloadURL(snapshot.ref);
-        }
-
         try {
             var soloList = newSolos.split(",");
         }
         catch {
             var soloList = newSolos;
         }
-
-        setDoc(doc(colRef, hottieID), {
-            name: newName,
-            eboard: newPosition,
-            solos: soloList,
-            joinyear: newJoined,
-            alumni: newAlumni,
-            photo: imgURL
-        }, { merge: true }).then(() => {
-            window.location.reload();
-        });
+        if (newImg === null){
+            var imgURL = docSnap.data().photo;
+            setDoc(doc(colRef, hottieID), {
+                name: newName,
+                eboard: newPosition,
+                solos: soloList,
+                joinyear: newJoined,
+                alumni: newAlumni,
+                photo: imgURL
+            }, { merge: true }).then(() => {
+                window.location.reload();
+            });
+        }
+        else {
+            uploadBytes(logoRef, newImg).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    var imgURL = url;
+                    setDoc(doc(colRef, hottieID), {
+                        name: newName,
+                        eboard: newPosition,
+                        solos: soloList,
+                        joinyear: newJoined,
+                        alumni: newAlumni,
+                        photo: imgURL
+                    }, { merge: true }).then(() => {
+                        window.location.reload();
+                    });
+                });
+            });
+        }
     }
 
     const deleteHottie = async () => {
@@ -76,14 +86,14 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
         <div className={styles.item}>
             <div className={styles.imageArea}>
                 <img src={img} />
-                <input type="file" id="logo" />
+                <input type="file" id="logo" onChange={(e) => setNewImg(e.target.files[0])}/>
             </div>
             <div className={styles.details}>
-                <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
-                <input type="text" value={newJoined} onChange={(e) => setNewJoined(e.target.value)} />
-                <input type="text" value={newSolos} onChange={(e) => setNewSolos(e.target.value)} />
-                <p>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
-                <input type="text" value={newPosition} onChange={(e) => setNewPosition(e.target.value)} />
+                <input type="text" placeholder={'Name'} value={newName} onChange={(e) => setNewName(e.target.value)} />
+                <input type="text" placeholder={'Joined In'} value={newJoined} onChange={(e) => setNewJoined(e.target.value)} />
+                <input type="text" placeholder={'Solos'} value={newSolos} onChange={(e) => setNewSolos(e.target.value)} />
+                <p style={{textAlign: 'center'}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
+                <input type="text" placeholder={'Eboard Position'} value={newPosition} onChange={(e) => setNewPosition(e.target.value)} />
                 <div className={styles.actions}>
                     <button onClick={saveHottie}>Save</button>
                     <button onClick={deleteHottie}>Delete</button>

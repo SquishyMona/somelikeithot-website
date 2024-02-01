@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -28,13 +30,20 @@ export default function AddRepertoire() {
             introduced: introduced,
             arranger: arranger,
             retired: isRetired,
+            photo: "placeholder"
+
         }).then((doc) => {
             const storageRef = ref(storage, `rep/${doc.id}`);
-            uploadBytes(storageRef, photo).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    setDoc(doc, { photo: url }, { merge: true });
+            if (document.getElementById('photo').files.length === 0 ){
+                console.log("No photo");
+            }
+            else {
+                uploadBytes(storageRef, photo).then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((url) => {
+                        setDoc(doc, { photo: url }, { merge: true });
+                    });
                 });
-            });
+            }
             router.push("/admin/repertoire/manage");
         });
     }

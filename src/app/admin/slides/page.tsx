@@ -13,17 +13,18 @@ import styles from '@/app/admin/manageform.module.css'
 function Slide({imgURL, id}) {
     const router = useRouter();
     const slideID = id;
+    const [img, setImg] = useState(null)
 
     const saveSlide = async () => {
         const colRef = collection(firestore_db, 'slides');
         const storageRef = getStorage(firebase_app);
         const slideRef = ref(storageRef, `slides/${slideID}`);
         const docSnap = await getDoc(doc(colRef, slideID));
-        if (document.getElementById('slide').files.length === 0 ){
+        if (img === null){
             var imgURL = docSnap.data().photo;
         }
         else {
-            const file = document.getElementById('slide').files[0];
+            const file = img;
             const snapshot = await uploadBytes(slideRef, file);
             var imgURL = await getDownloadURL(snapshot.ref);
         }
@@ -38,7 +39,7 @@ function Slide({imgURL, id}) {
     return (
         <div className={styles.slide}>
             <img src={imgURL} alt="slide" />
-            <input type="file" id="slide" name="slide" accept="image/*" />
+            <input type="file" id="slide" name="slide" accept="image/*" onChange={(e) => setImg(e.target.files[0])}/>
             <button onClick={saveSlide}>Save</button>
         </div>
     )

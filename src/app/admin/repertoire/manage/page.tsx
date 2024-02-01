@@ -25,11 +25,11 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
         const photoRef = ref(storageRef, `rep/${id}`);
         const docSnap = await getDoc(doc(colRef, id));
 
-        if (document.getElementById("photo").files.length === 0) {
+        if (newPhoto === null) {
             var imgURL = docSnap.data().photo;
         }
         else {
-            const file = document.getElementById("photo").files[0];
+            const file = newPhoto;
             const snapshot = await uploadBytes(photoRef, file);
             var imgURL = await getDownloadURL(snapshot.ref);
         }
@@ -77,16 +77,19 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
             <div className={styles.details}>
                 <input
                     type="text"
+                    placeholder='Title'
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                 />
                 <input
                     type="text"
+                    placeholder='Arranger'
                     value={newArranger}
                     onChange={(e) => setNewArranger(e.target.value)}
                 />
                 <input
                     type="text"
+                    placeholder='Introduced'
                     value={newIntroduced}
                     onChange={(e) => setNewIntroduced(e.target.value)}
                 />

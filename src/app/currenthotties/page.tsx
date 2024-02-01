@@ -89,7 +89,7 @@ export default function CurrentHotties() {
 
             <h1 className="category" style={{marginTop: '20px'}}>Eboard</h1>
             <h2 style={{fontFamily: 'Quicksand', color: 'white', textAlign: 'center', marginTop: '10px'}}>
-                Click a name for more info!
+                
             </h2>
             <div className={styles.hottiecontainer}>
                     {eboard.map((hottie) => {

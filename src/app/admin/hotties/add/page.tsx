@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -34,13 +36,19 @@ export default function AddHottie() {
             photo: "placeholder"
         }).then((doc) => {
             const storageRef = ref(storage, `slihsters/${doc.id}`);
-            uploadBytes(storageRef, photo).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    setDoc(doc, { photo: url }, { merge: true }).then(() => {
-                        router.push("/admin/hotties/manage");
+            if (document.getElementById('photo').files.length === 0 ){
+                console.log("No photo");
+                router.push("/admin/hotties/manage");
+            }
+            else {
+                uploadBytes(storageRef, photo).then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((url) => {
+                        setDoc(doc, { photo: url }, { merge: true }).then(() => {
+                            router.push("/admin/hotties/manage");
+                        });
                     });
                 });
-            });
+            }
         });
     }
 
@@ -60,16 +68,16 @@ export default function AddHottie() {
 
                 <div className={styles.contentForm}>
                     <p>Image</p>
-                    <input type="file" onChange={(e) => setImg(e.target.files[0])} />
+                    <input type="file" id="photo" onChange={(e) => setImg(e.target.files[0])} />
                     <p>Name</p>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" placeholder='Name' value={name} onChange={(e) => setName(e.target.value)} />
                     <p>Joined</p>
-                    <input type="text" value={joinyear} onChange={(e) => setJoined(e.target.value)} />
+                    <input type="text" placeholder='Joined In' value={joinyear} onChange={(e) => setJoined(e.target.value)} />
                     <p>Solos</p>
-                    <p style={{fontWeight: 'bold'}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
-                    <input type="text" value={solos} onChange={(e) => setSolos(e.target.value)} />
+                    <p style={{fontWeight: 'bold', textAlign: "center"}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
+                    <input type="text" placeholder='Solos' value={solos} onChange={(e) => setSolos(e.target.value)} />
                     <p>Position</p>
-                    <input type="text" value={eboard} onChange={(e) => setPosition(e.target.value)} />
+                    <input type="text" placeholder='Eboard Position' value={eboard} onChange={(e) => setPosition(e.target.value)} />
                     <p>Alumni</p>
                     <input type="checkbox" value={alumni} onChange={(e) => setAlumni(e.target.value)} />
                     <button onClick={addHottie}>Add</button>

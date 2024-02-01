@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -16,7 +18,7 @@ export default function Admin() {
         if (user === null) {
             router.push("/signin");
         }
-    }, [user]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user }}>
@@ -28,7 +30,7 @@ export default function Admin() {
                 <div className={styles.profile}>
                     <img src={user?.photoURL} />
                     <h2>Welcome, {user?.displayName}</h2>
-                    <p>The name and photo displayed will be used to identify you in posts and changes you make to the website.</p>
+                    <p>The name and photo displayed will be logged when you make changes to the website.</p>
                     <p>Looking to add a new admin user? Please visit the <a href="https://console.firebase.google.com/project/slihnextwebsite/authentication/users">Firebase Admin Console</a>.</p>
                     <div className={styles.profileActions}>
                         <button onClick={() => router.push('/admin/editprofile')}>Edit Profile</button>
@@ -52,11 +54,6 @@ export default function Admin() {
                         <h3>Repertoire</h3>
                         <button onClick={() => router.push('/admin/repertoire/manage')}>Manage</button>
                         <button onClick={() => router.push('/admin/repertoire/add')}>Add</button>
-                    </div>
-                    <div className={styles.actions}>
-                        <h3>Media</h3>
-                        <button onClick={() => router.push('/admin/media/manage')}>Manage</button>
-                        <button onClick={() => router.push('/admin/media/add')}>Add</button>
                     </div>
                     <div className={styles.actions}>
                         <h3>Slides</h3>

@@ -22,22 +22,25 @@ export default function AddHottie() {
         const storage = getStorage();
 
         const isAlumni = alumni === "on" ? true : false;
+        const solosList = solos === "" ? [] : solos.split(",");
 
         const colRef = collection(firestore_db, 'slihsters');
         await addDoc(colRef, {
             name: name,
             eboard: eboard,
-            solos: solos,
+            solos: solosList,
             joinyear: joinyear,
             alumni: isAlumni,
+            photo: "placeholder"
         }).then((doc) => {
             const storageRef = ref(storage, `slihsters/${doc.id}`);
             uploadBytes(storageRef, photo).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
-                    setDoc(doc, { photo: url }, { merge: true });
+                    setDoc(doc, { photo: url }, { merge: true }).then(() => {
+                        router.push("/admin/hotties/manage");
+                    });
                 });
             });
-            router.push("/admin/hotties/manage");
         });
     }
 
@@ -45,7 +48,7 @@ export default function AddHottie() {
         if (user === null) {
             router.push("/signin");
         }
-    }, [user]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user }}>
@@ -63,6 +66,7 @@ export default function AddHottie() {
                     <p>Joined</p>
                     <input type="text" value={joinyear} onChange={(e) => setJoined(e.target.value)} />
                     <p>Solos</p>
+                    <p style={{fontWeight: 'bold'}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
                     <input type="text" value={solos} onChange={(e) => setSolos(e.target.value)} />
                     <p>Position</p>
                     <input type="text" value={eboard} onChange={(e) => setPosition(e.target.value)} />

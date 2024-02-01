@@ -129,6 +129,27 @@
     background-color: rgb(120, 89, 102);
 }
 
+.slide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    background-color: rgb(120, 89, 102);
+}
+
+.slide img {
+    width: 25%;
+    max-width: 400px;
+    height: auto;
+    margin: 10px;
+}
+
 @media (max-width: 800px) {
     .item {
         flex-direction: column;
@@ -151,6 +172,10 @@
     }
 
     .actions {
+        flex-direction: column;
+    }
+
+    .slide {
         flex-direction: column;
     }
 }

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -37,7 +39,7 @@ function Eboard({ name, joinyear, photo, solos, eboard }) {
                 <h2>{name}</h2>
                 <p className={styles.eboard}>{eboard}</p>
                 <p style={{marginBottom: '10px'}}>Joined {joinyear}</p>
-                {solos.length ?
+                {solos.length !== 0 ?
                     <span style={{fontWeight: 'bold', textDecoration: 'underline'}}>
                         Solos<br/>
                     </span>

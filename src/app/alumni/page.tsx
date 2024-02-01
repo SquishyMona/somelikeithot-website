@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -54,6 +56,7 @@ export default function Alumni() {
             <div className={styles.hottiecontainer}>
                 {alumni.map((hottie) => {
                     return <Hottie
+                        key={hottie.id}
                         name={hottie.name}
                         joinyear={hottie.joinyear}
                         photo={hottie.photo}

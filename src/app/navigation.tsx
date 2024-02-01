@@ -13,10 +13,10 @@ export default function Navigation() {
           if (isOpen) {
             document.getElementById('dropdown').style.top = '0';
             if (user) {
-              document.getElementById('navbar').style.height = '660px';
+              document.getElementById('navbar').style.height = '600px';
             }
             else {
-              document.getElementById('navbar').style.height = '600px';
+              document.getElementById('navbar').style.height = '540px';
             }
           }
           else {
@@ -44,7 +44,6 @@ export default function Navigation() {
                     <li><Link href="/currenthotties">Current Hotties</Link></li>
                     <li><Link href="/repertoire">Repertoire</Link></li>
                     <li><Link href="/alumni">Alumni</Link></li>
-                    <li><Link href="/media">Media</Link></li>
                     <li><Link href="https://www.bonfire.com/store/some-like-it-hot/" target="_blank">Merch</Link></li>
                     <li><Link href="/contact">Contact</Link></li>
                     {

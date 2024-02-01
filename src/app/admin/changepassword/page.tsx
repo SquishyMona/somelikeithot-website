@@ -30,7 +30,7 @@ export default function ChangePassword() {
         if (user === null) {
             router.push("/signin");
         }
-    }, [user]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user }}>

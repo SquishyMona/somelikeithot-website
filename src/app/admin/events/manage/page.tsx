@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from 'react'
@@ -86,6 +88,7 @@ function Event({title, time, location, description, livelink, img, id}) {
 }
 
 export default function ManageEvents() {
+    const router = useRouter();
     const { user } = useAuthContext();
     const [events, setEvents] = useState<{ id: string; }[]>([]);
     const getEvents = async () => {
@@ -96,6 +99,9 @@ export default function ManageEvents() {
         })
     }
     useEffect(() => {
+        if (user === null) {
+            router.push("/signin");
+        }
         getEvents();
     }, []);
 

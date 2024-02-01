@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from 'react'
@@ -44,6 +46,7 @@ export default function Events() {
             <div className={styles.container}>
                 {events.map((event) => {
                     return <Event 
+                    key={event.id}
                     title={event.title}
                     time={event.datetime}
                     location={event.location}

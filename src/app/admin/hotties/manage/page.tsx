@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from 'react'
@@ -7,7 +9,7 @@ import { firebase_app, firestore_db } from '@/firebase/config'
 import { useRouter } from 'next/navigation'
 import { AuthContext, useAuthContext } from '@/context/authcontext'
 import styles from '@/app/admin/manageform.module.css'
-import { get } from 'http';
+import { error } from 'console';
 
 function Hottie({name, position, img, solos, joined, alumni, id}) {
     const router = useRouter();
@@ -48,7 +50,7 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
             joinyear: newJoined,
             alumni: newAlumni,
             photo: imgURL
-        }).then(() => {
+        }, { merge: true }).then(() => {
             window.location.reload();
         });
     }
@@ -106,21 +108,31 @@ export default function Manage() {
     }, [user]);
 
     const getHotties = async () => {
-        const memberQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '==', ''), where('alumni', '==', false));
-        getDocs(memberQuery).then((data) => {
-            setHotties(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        });
+        try {
+            const memberQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '==', ''), where('alumni', '==', false));
+            getDocs(memberQuery).then((data) => {
+                setHotties(data.docs.map((doc) => {
+                    return {...doc.data(), id: doc.id}
+                }));
+            });
+        }
+        catch(error) {
+            console.error(error.message);
+        }
     }
 
     const getEboard = async () => {
-        const eboardQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '!=', ''), where('alumni', '==', false));
-        getDocs(eboardQuery).then((data) => {
-            setEboard(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        });
+        try {
+            const eboardQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '!=', ''), where('alumni', '==', false));
+            getDocs(eboardQuery).then((data) => {
+                setEboard(data.docs.map((doc) => {
+                    return {...doc.data(), id: doc.id}
+                }));
+            });
+        }
+        catch(error) {
+            console.error(error.message);
+        }
     }
 
     const getAlumni = async () => {
@@ -133,6 +145,9 @@ export default function Manage() {
     }
 
     useEffect(() => {
+        if (user === null) {
+            router.push("/signin");
+        }
         getHotties();
         getEboard();
         getAlumni();

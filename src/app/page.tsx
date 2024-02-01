@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from 'react'
@@ -43,7 +45,7 @@ export default function Home() {
           <span id="slide-12"></span>
           <div className="image-container">
             {slides.map((slide) => {
-              return <img key={slide.id} src={slide.photo} className="slide" />
+              return <img key={slide.id} src={slide.imgURL} className="slide" />
             })}
           </div>  
       </div>

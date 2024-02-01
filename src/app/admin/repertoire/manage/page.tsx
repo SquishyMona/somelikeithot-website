@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from 'react'
@@ -99,6 +101,7 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
 }
 
 export default function ManageRepertoire() {
+    const { user } = useAuthContext();
     const router = useRouter();
     const [rep, setRep] = useState<{ id: string; }[]>([]);
     const [retired, setRetired] = useState<{ id: string; }[]>([]);
@@ -120,44 +123,53 @@ export default function ManageRepertoire() {
     }
 
     useEffect(() => {
+        if (user === null) {
+            router.push("/signin");
+        }
         getRep();
         getRetired();
     }, []);
 
     return (
-        <div className={styles.manageForm}>
-            <h1>Manage Repertoire</h1>
-            <button onClick={() => { router.push("/admin/repertoire/add") }}>Add Song</button>
-            <h1>Current Repertoire</h1>
-            <div className={styles.container}>
-                {rep.map((rep) => {
-                    return (
-                        <Song
-                            id={rep.id}
-                            title={rep.title}
-                            photo={rep.photo}
-                            introduced={rep.introduced}
-                            arranger={rep.arranger}
-                            retired={rep.retired}
-                        />
-                    );
-                })}
-            </div>
-            <h1>Retired Repertoire</h1>
-            <div className={styles.container}>
-                {retired.map((rep) => {
-                    return (
-                        <Song
-                            id={rep.id}
-                            title={rep.title}
-                            photo={rep.photo}
-                            introduced={rep.introduced}
-                            arranger={rep.arranger}
-                            retired={rep.retired}
-                        />
-                    );
-                })}
-            </div>
-        </div>
+        <AuthContext.Provider value={{ user }}>
+            { user ? 
+                <div className={styles.manageForm}>
+                    <h1>Manage Repertoire</h1>
+                    <button onClick={() => { router.push("/admin/repertoire/add") }}>Add Song</button>
+                    <h1>Current Repertoire</h1>
+                    <div className={styles.container}>
+                        {rep.map((rep) => {
+                            return (
+                                <Song
+                                    key={rep.id}
+                                    id={rep.id}
+                                    title={rep.title}
+                                    photo={rep.photo}
+                                    introduced={rep.introduced}
+                                    arranger={rep.arranger}
+                                    retired={rep.retired}
+                                />
+                            );
+                        })}
+                    </div>
+                    <h1>Retired Repertoire</h1>
+                    <div className={styles.container}>
+                        {retired.map((rep) => {
+                            return (
+                                <Song
+                                    key={rep.id}
+                                    id={rep.id}
+                                    title={rep.title}
+                                    photo={rep.photo}
+                                    introduced={rep.introduced}
+                                    arranger={rep.arranger}
+                                    retired={rep.retired}
+                                />
+                            );
+                        })}
+                    </div>
+                </div>
+            : null }
+        </AuthContext.Provider>
     );
 }

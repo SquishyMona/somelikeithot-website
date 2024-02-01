@@ -43,7 +43,7 @@ export default function AddRepertoire() {
         if (user === null) {
             router.push("/signin");
         }
-    }, [user]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user }}>

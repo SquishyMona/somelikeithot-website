@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useState, useEffect } from 'react'
@@ -52,6 +54,7 @@ export default function Repertoire() {
             <div className={styles.currentrep}>
                 {rep.map((rep) => {
                     return <Song 
+                    key={rep.id}
                     photo={rep.photo}
                     title={rep.title}
                     introduced={rep.introduced}

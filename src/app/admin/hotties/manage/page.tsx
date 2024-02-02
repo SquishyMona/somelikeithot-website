@@ -8,12 +8,16 @@ import { getDownloadURL, uploadBytes, getStorage, ref, deleteObject } from 'fire
 import { firebase_app, firestore_db } from '@/firebase/config'
 import { useRouter } from 'next/navigation'
 import { AuthContext, useAuthContext } from '@/context/authcontext'
+import { BarLoader } from 'react-spinners';
 import styles from '@/app/admin/manageform.module.css'
 import { error } from 'console';
+import { set } from 'firebase/database';
 
 function Hottie({name, position, img, solos, joined, alumni, id}) {
     const router = useRouter();
     const hottieID = id;
+
+    const [loading, setLoading] = useState(false);
 
     const [newName, setNewName] = useState(name);
     const [newPosition, setNewPosition] = useState(position);
@@ -22,7 +26,9 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
     const [newJoined, setNewJoined] = useState(joined);
     const [newAlumni, setNewAlumni] = useState(alumni);
 
+
     const saveHottie = async () => {
+        setLoading(true);
         const colRef = collection(firestore_db, 'slihsters');
         const storageRef = getStorage(firebase_app);
         const logoRef = ref(storageRef, `slihsters/${hottieID}`);
@@ -43,7 +49,7 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
                 alumni: newAlumni,
                 photo: imgURL
             }, { merge: true }).then(() => {
-                window.location.reload();
+                setLoading(false);
             });
         }
         else {
@@ -58,7 +64,8 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
                         alumni: newAlumni,
                         photo: imgURL
                     }, { merge: true }).then(() => {
-                        window.location.reload();
+                        img = imgURL;
+                        setLoading(false);
                     });
                 });
             });
@@ -84,23 +91,29 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
 
     return (
         <div className={styles.item}>
-            <div className={styles.imageArea}>
-                <img src={img} />
-                <input type="file" id="logo" onChange={(e) => setNewImg(e.target.files[0])}/>
-            </div>
-            <div className={styles.details}>
-                <input type="text" placeholder={'Name'} value={newName} onChange={(e) => setNewName(e.target.value)} />
-                <input type="text" placeholder={'Joined In'} value={newJoined} onChange={(e) => setNewJoined(e.target.value)} />
-                <input type="text" placeholder={'Solos'} value={newSolos} onChange={(e) => setNewSolos(e.target.value)} />
-                <p style={{textAlign: 'center'}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
-                <input type="text" placeholder={'Eboard Position'} value={newPosition} onChange={(e) => setNewPosition(e.target.value)} />
-                <div className={styles.actions}>
-                    <button onClick={saveHottie}>Save</button>
-                    <button onClick={deleteHottie}>Delete</button>
-                    <button onClick={convertAlumni}>Switch Alumni Status</button>
+            {loading ? <BarLoader color={'#000000'} loading={loading} /> : 
+            <>
+                <div className={styles.imageArea}>
+                    <img id='displayimg' src={img} />
+                    <input type="file" id="logo" onChange={(e) => setNewImg(e.target.files[0])}/>
                 </div>
-            </div>
+                <div className={styles.details}>
+                    <input type="text" placeholder={'Name'} value={newName} onChange={(e) => setNewName(e.target.value)} />
+                    <input type="text" placeholder={'Joined In'} value={newJoined} onChange={(e) => setNewJoined(e.target.value)} />
+                    <input type="text" placeholder={'Solos'} value={newSolos} onChange={(e) => setNewSolos(e.target.value)} />
+                    <p style={{textAlign: 'center'}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
+                    <input type="text" placeholder={'Eboard Position'} value={newPosition} onChange={(e) => setNewPosition(e.target.value)} />
+                    <div className={styles.actions}>
+                        <button onClick={saveHottie}>Save</button>
+                        <button onClick={deleteHottie}>Delete</button>
+                        <button onClick={convertAlumni}>Switch Alumni Status</button>
+                    </div>
+                </div>
+            </>
+            }
         </div>
+
+
     )
 }
 

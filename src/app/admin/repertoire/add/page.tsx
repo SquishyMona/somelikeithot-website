@@ -64,7 +64,7 @@ export default function AddRepertoire() {
 
                 <div className={styles.contentForm}>
                     <p>Image</p>
-                    <input type="file" onChange={(e) => setPhoto(e.target.files[0])} />
+                    <input type="file" id="photo" onChange={(e) => setPhoto(e.target.files[0])} />
                     <p>Title</p>
                     <input type="text" onChange={(e) => setTitle(e.target.value)} />
                     <p>Introduced</p>

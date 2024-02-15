@@ -34,7 +34,7 @@ export default function AddRepertoire() {
 
         }).then((doc) => {
             const storageRef = ref(storage, `rep/${doc.id}`);
-            if (document.getElementById('photo').files.length === 0 ){
+            if (photo === null){
                 console.log("No photo");
             }
             else {

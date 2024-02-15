@@ -8,18 +8,23 @@ import { getDownloadURL, uploadBytes, getStorage, ref, deleteObject } from 'fire
 import { firebase_app, firestore_db } from '@/firebase/config'
 import { useRouter } from 'next/navigation'
 import { AuthContext, useAuthContext } from '@/context/authcontext'
+import { BarLoader } from 'react-spinners';
 import styles from '@/app/admin/manageform.module.css'
+import { set } from 'firebase/database';
 
 const dbInstance = collection(firestore_db, "rep");
 
 function Song({ title, photo, introduced, arranger, retired, id }) {
+    const [loading, setLoading] = useState(false);
+
     const [newTitle, setNewTitle] = useState(title);
-    const [newPhoto, setNewPhoto] = useState(photo);
+    const [newPhoto, setNewPhoto] = useState(null);
     const [newIntroduced, setNewIntroduced] = useState(introduced);
     const [newArranger, setNewArranger] = useState(arranger);
     const [newRetired, setNewRetired] = useState(retired);
 
     const saveSong = async () => {
+        setLoading(true);
         const colRef = collection(firestore_db, "rep");
         const storageRef = getStorage(firebase_app);
         const photoRef = ref(storageRef, `rep/${id}`);
@@ -41,21 +46,28 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
             arranger: newArranger,
             retired: newRetired,
         }).then(() => {
-            window.location.reload();
+            setLoading(false);
         });
     };
 
     const deleteSong = async () => {
+        setLoading(true);
         const colRef = collection(firestore_db, "rep");
-        const storageRef = getStorage(firebase_app);
-        const photoRef = ref(storageRef, `rep/${id}`);
-        await deleteObject(photoRef);
+        try {
+            const storageRef = getStorage(firebase_app);
+            const photoRef = ref(storageRef, `rep/${id}`);    
+            await deleteObject(photoRef);
+        }
+        catch (error) {
+            console.log("No photo to delete", error);
+        }
         await deleteDoc(doc(colRef, id)).then(() => {
             window.location.reload();
         });
     };
 
     const convertRetired = async () => {
+        setLoading(true);
         const colRef = collection(firestore_db, "rep");
         await setDoc(doc(colRef, id), {
             retired: newRetired === false ? true : false,
@@ -66,39 +78,43 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
 
     return (
         <div className={styles.item}>
-            <div className={styles.imageArea}>
-                <img src={photo} />
-                <input
-                    type="file"
-                    id="photo"
-                    onChange={(e) => setNewPhoto(e.target.files[0])}
-                />
-            </div>
-            <div className={styles.details}>
-                <input
-                    type="text"
-                    placeholder='Title'
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder='Arranger'
-                    value={newArranger}
-                    onChange={(e) => setNewArranger(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder='Introduced'
-                    value={newIntroduced}
-                    onChange={(e) => setNewIntroduced(e.target.value)}
-                />
-                <div className={styles.actions}>
-                    <button onClick={saveSong}>Save</button>
-                    <button onClick={deleteSong}>Delete</button>
-                    <button onClick={convertRetired}>Change Retirement Status</button>
-                </div>
-            </div>
+            { loading ? <BarLoader color={'#000000'} loading={loading} /> : 
+                <>
+                    <div className={styles.imageArea}>
+                        <img src={photo} />
+                        <input
+                            type="file"
+                            id="photo"
+                            onChange={(e) => setNewPhoto(e.target.files[0])}
+                        />
+                    </div>
+                    <div className={styles.details}>
+                        <input
+                            type="text"
+                            placeholder='Title'
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Arranger'
+                            value={newArranger}
+                            onChange={(e) => setNewArranger(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Introduced'
+                            value={newIntroduced}
+                            onChange={(e) => setNewIntroduced(e.target.value)}
+                        />
+                        <div className={styles.actions}>
+                            <button onClick={saveSong}>Save</button>
+                            <button onClick={deleteSong}>Delete</button>
+                            <button onClick={convertRetired}>Change Retirement Status</button>
+                        </div>
+                    </div>
+                </>
+            }
         </div>
     );
 }

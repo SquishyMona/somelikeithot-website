@@ -25,15 +25,43 @@ export default function AddHottie() {
 
         const isAlumni = alumni === "on" ? true : false;
         const solosList = solos === "" ? [] : solos.split(",");
+        var sortNum;
 
         const colRef = collection(firestore_db, 'slihsters');
+        if (eboard === "") {
+            sortNum = 9;
+        }
+        else {
+            if (eboard === "President") {
+                sortNum = 1;
+            }
+            if (eboard === "Vice President") {
+                sortNum = 2;
+            }
+            if (eboard === "Music Director") {
+                sortNum = 3;
+            }
+            if (eboard === "Assistant Music Director") {
+                sortNum = 4;
+            }
+            if (eboard === "Secretary") {
+                sortNum = 5;
+            }
+            if (eboard === "Treasurer") {
+                sortNum = 6;
+            }
+            if (eboard === "Public Relations") {
+                sortNum = 7;
+            }
+        }
         await addDoc(colRef, {
             name: name,
             eboard: eboard,
             solos: solosList,
             joinyear: joinyear,
             alumni: isAlumni,
-            photo: "placeholder"
+            photo: "placeholder",
+            priority: sortNum
         }).then((doc) => {
             const storageRef = ref(storage, `slihsters/${doc.id}`);
             if (document.getElementById('photo').files.length === 0 ){

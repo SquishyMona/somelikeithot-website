@@ -3,7 +3,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { firestore_db } from "@/firebase/config";
 import styles from "./page.module.css";
 
@@ -67,7 +67,7 @@ export default function CurrentHotties() {
         })
     }
 
-    const eboardQuery = query(dbInstance, where('eboard', '!=', ''), where('alumni', '==', false));
+    const eboardQuery = query(dbInstance, where('eboard', '!=', ''), where('alumni', '==', false), orderBy('eboard'), orderBy('priority'));
     const getEboard = async () => {
         getDocs(eboardQuery).then((data) => {
             setEboard(data.docs.map((doc) => {

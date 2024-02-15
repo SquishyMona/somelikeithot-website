@@ -3,15 +3,13 @@
 "use client";
 
 import { useState, useEffect } from 'react'
-import { getDocs, getDoc, setDoc, collection, doc, deleteDoc, query, where } from 'firebase/firestore'
+import { getDocs, getDoc, setDoc, collection, doc, deleteDoc, query, where, orderBy } from 'firebase/firestore'
 import { getDownloadURL, uploadBytes, getStorage, ref, deleteObject } from 'firebase/storage';
 import { firebase_app, firestore_db } from '@/firebase/config'
 import { useRouter } from 'next/navigation'
 import { AuthContext, useAuthContext } from '@/context/authcontext'
 import { BarLoader } from 'react-spinners';
 import styles from '@/app/admin/manageform.module.css'
-import { error } from 'console';
-import { set } from 'firebase/database';
 
 function Hottie({name, position, img, solos, joined, alumni, id}) {
     const router = useRouter();
@@ -94,7 +92,7 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
             {loading ? <BarLoader color={'#000000'} loading={loading} /> : 
             <>
                 <div className={styles.imageArea}>
-                    <img id='displayimg' src={img} />
+                    <img src={img} />
                     <input type="file" id="logo" onChange={(e) => setNewImg(e.target.files[0])}/>
                 </div>
                 <div className={styles.details}>
@@ -112,8 +110,6 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
             </>
             }
         </div>
-
-
     )
 }
 
@@ -146,7 +142,7 @@ export default function Manage() {
 
     const getEboard = async () => {
         try {
-            const eboardQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '!=', ''), where('alumni', '==', false));
+            const eboardQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '!=', ''), where('alumni', '==', false), orderBy('eboard'), orderBy('priority'));
             getDocs(eboardQuery).then((data) => {
                 setEboard(data.docs.map((doc) => {
                     return {...doc.data(), id: doc.id}

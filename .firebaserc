@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "slihnextwebsite"
-  }
+  },
+  "targets": {
+    "slihnextwebsite": {
+      "hosting": {
+        "somelikeithot": [
+          "somelikeithot"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 import { AuthContext, useAuthContext } from '@/context/authcontext'
 import styles from '@/app/admin/manageform.module.css'
 
-function Slide({imgURL, id}) {
+function Slide({imgURL, slidenumber, id}) {
     const router = useRouter();
     const slideID = id;
     const [img, setImg] = useState(null)
@@ -30,7 +30,8 @@ function Slide({imgURL, id}) {
         }
 
         setDoc(doc(colRef, slideID), {
-            imgURL: imgURL
+            imgURL: imgURL,
+            slidenum: slidenumber
         }).then(() => {
             window.location.reload();
         });
@@ -79,7 +80,7 @@ export default function ManageSlides() {
 
                 <div className={styles.manageForm}>
                     {slides.map((slide) => {
-                        return <Slide key={slide.id} imgURL={slide.imgURL} id={slide.id} />
+                        return <Slide key={slide.id} imgURL={slide.imgURL} slidenumber={slide.slidenum} id={slide.id} />
                     })}
                 </div>
             </>

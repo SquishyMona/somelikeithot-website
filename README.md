@@ -1,1 +1,2 @@
-This is the brand new website for Some Like It Hot, SUNY Fredonia's premier all-female identifying A Capella group. This website was written with NextJS and TypeScript using Firebase for authentication, storage, and data storing.
+#Some Like It Hot Website
+This is the brand new website for Some Like It Hot, SUNY Fredonia's premier all-female identifying A Capella group. This website was written with NextJS and TypeScript using Firebase for authentication, storage, and data storing. This new website features a new admin dashboard for members of the executive board to go in and update various aspects of the website, without having any coding or web programming knowledge.

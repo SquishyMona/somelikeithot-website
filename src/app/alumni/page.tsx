@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from "react";
 import { firestore_db } from "@/firebase/config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import styles from "./page.module.css";
 
 const dbInstance = collection(firestore_db, "slihsters");
@@ -35,7 +35,7 @@ function Hottie({ name, joinyear, photo, solos, eboard }) {
 export default function Alumni() {
     const [alumni, setAlumni] = useState<{ id: string; }[]>([]);
 
-    const alumniQuery = query(dbInstance, where('alumni', '==', true));
+    const alumniQuery = query(dbInstance, where('alumniTime', '!=', null), where('alumni', '==', true), orderBy('joinyear'));
     const getAlumni = async () => {
         getDocs(alumniQuery).then((data) => {
             setAlumni(data.docs.map((doc) => {

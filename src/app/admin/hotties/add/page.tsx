@@ -60,8 +60,10 @@ export default function AddHottie() {
             solos: solosList,
             joinyear: joinyear,
             alumni: isAlumni,
-            photo: "placeholder",
-            priority: sortNum
+            photo: "Images/logo.png",
+            priority: sortNum,
+            alumniTime: new Date(Date.now()),
+            joinTime: new Date(Date.now())
         }).then((doc) => {
             const storageRef = ref(storage, `slihsters/${doc.id}`);
             if (document.getElementById('photo').files.length === 0 ){

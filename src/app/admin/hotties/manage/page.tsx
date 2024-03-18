@@ -82,7 +82,7 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
 
     const convertAlumni = async () => {
         const colRef = collection(firestore_db, 'slihsters');
-        setDoc(doc(colRef, hottieID), { alumni: newAlumni === false ? true: false }, { merge: true }).then(() => {
+        setDoc(doc(colRef, hottieID), { alumni: newAlumni === false ? true: false, alumniTime: new Date(Date.now()) }, { merge: true }).then(() => {
             window.location.reload();
         });
     }
@@ -128,7 +128,7 @@ export default function Manage() {
 
     const getHotties = async () => {
         try {
-            const memberQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '==', ''), where('alumni', '==', false));
+            const memberQuery = query(collection(firestore_db, 'slihsters'), where('joinTime', '!=', null), where('eboard', '==', ''), where('alumni', '==', false), orderBy('joinTime'));
             getDocs(memberQuery).then((data) => {
                 setHotties(data.docs.map((doc) => {
                     return {...doc.data(), id: doc.id}
@@ -142,7 +142,7 @@ export default function Manage() {
 
     const getEboard = async () => {
         try {
-            const eboardQuery = query(collection(firestore_db, 'slihsters'), where('eboard', '!=', ''), where('alumni', '==', false), orderBy('eboard'), orderBy('priority'));
+            const eboardQuery = query(collection(firestore_db, 'slihsters'), where('priority', '!=', 9), where('alumni', '==', false), orderBy('priority'));
             getDocs(eboardQuery).then((data) => {
                 setEboard(data.docs.map((doc) => {
                     return {...doc.data(), id: doc.id}

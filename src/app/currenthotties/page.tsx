@@ -58,7 +58,7 @@ export default function CurrentHotties() {
     const [hotties, setHotties] = useState<{ id: string; }[]>([]);
     const [eboard, setEboard] = useState<{ id: string; }[]>([]);
 
-    const hottieQuery = query(dbInstance, where('eboard', '==', ''), where('alumni', '==', false));
+    const hottieQuery = query(dbInstance, where('joinTime', '!=', null), where('eboard', '==', ''), where('alumni', '==', false), orderBy('joinTime'));
     const getHotties = async () => {
         getDocs(hottieQuery).then((data) => {
             setHotties(data.docs.map((doc) => {
@@ -67,7 +67,7 @@ export default function CurrentHotties() {
         })
     }
 
-    const eboardQuery = query(dbInstance, where('eboard', '!=', ''), where('alumni', '==', false), orderBy('eboard'), orderBy('priority'));
+    const eboardQuery = query(dbInstance, where('priority', '!=', 9), where('alumni', '==', false), orderBy('priority'));
     const getEboard = async () => {
         getDocs(eboardQuery).then((data) => {
             setEboard(data.docs.map((doc) => {

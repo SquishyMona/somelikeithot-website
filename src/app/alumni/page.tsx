@@ -35,7 +35,7 @@ function Hottie({ name, joinyear, photo, solos, eboard }) {
 export default function Alumni() {
     const [alumni, setAlumni] = useState<{ id: string; }[]>([]);
 
-    const alumniQuery = query(dbInstance, where('alumniTime', '!=', null), where('alumni', '==', true), orderBy('joinyear'));
+    const alumniQuery = query(dbInstance, where('alumniTime', '!=', null), where('alumni', '==', true), orderBy('alumniTime', 'desc'));
     const getAlumni = async () => {
         getDocs(alumniQuery).then((data) => {
             setAlumni(data.docs.map((doc) => {

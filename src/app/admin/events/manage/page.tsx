@@ -29,14 +29,15 @@ function Event({title, time, location, description, livelink, img, id}) {
         setLoading(true);
         const colRef = collection(firestore_db, 'events');
         const storageRef = getStorage(firebase_app);
-        const logoRef = ref(storageRef, `events/${eventID}`);
         const docSnap = await getDoc(doc(colRef, eventID));
         console.log(docSnap.data())
-        if (img === null){
+        if (newImg === null){
             var imgURL = docSnap.data().logo;
         }
         else {
-            var imgURL = newImg
+            const file = newImg;
+            const snapshot = await uploadBytes(ref(storageRef, `events/${eventID}`), file);
+            var imgURL = await getDownloadURL(snapshot.ref);
         }
 
         setDoc(doc(colRef, eventID), {
@@ -68,15 +69,7 @@ function Event({title, time, location, description, livelink, img, id}) {
                 <>
                     <div className={styles.imageArea}>
                         <img src={img}></img>
-                        <input type="file" id="logo" onChange={(e) => {
-                            const file = e.target.files[0];
-                            const storageRef = ref(getStorage(firebase_app), `events/${eventID}`);
-                            uploadBytes(storageRef, file).then((snapshot) => {
-                                getDownloadURL(snapshot.ref).then((url) => {
-                                    setNewImg(url);
-                                })
-                            })
-                        }} />
+                        <input type="file" id="logo" onChange={(e) => {setNewImg(e.target.files[0])}}/>
                     </div>
                     <div className={styles.details}>
                         <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />

@@ -61,21 +61,16 @@ export default function Repertoire() {
                     arranger={rep.arranger} />
                 })}
             </div>
-
-            <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1>
-            <div className={styles.retired} style={{marginTop: '20px', marginBottom: '30px'}}>
-                {retired.map((rep) => {
+            <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1><br/>
+            <div class={styles.pastrep}>
+            {retired.map((rep) => {
                     return ( 
-                            <div key='' className={styles.retired}>
-                                <span style={{fontSize: '20px', textAlign: 'center', fontWeight: 'bold', fontFamily: 'Quicksand'}}>
-                                    {rep.title}
-                                </span>
-                                <span>: Introduced in&nbsp;{rep.introduced}, arranged by {rep.arranger} </span>
+                        <>
+                            <div className={styles.pastrep}>
+                                <p>{rep.title} by {rep.artist}: {rep.soloist}</p>
                             </div>
                     )
                 })}
-            </div>
-            <div class={styles.pastrep}>
                 <p>Traitor by Olivia Rodrigo: Emma</p>
                 <p>Rumor Has It by Adele: Alli</p>
                 <p>Boys Like You By dodie: Jenna</p>

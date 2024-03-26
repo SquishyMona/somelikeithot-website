@@ -14,13 +14,15 @@ import { set } from 'firebase/database';
 
 const dbInstance = collection(firestore_db, "rep");
 
-function Song({ title, photo, introduced, arranger, retired, id }) {
+function Song({ title, photo, introduced, artist, arranger, soloist, retired, id }) {
     const [loading, setLoading] = useState(false);
 
     const [newTitle, setNewTitle] = useState(title);
     const [newPhoto, setNewPhoto] = useState(null);
     const [newIntroduced, setNewIntroduced] = useState(introduced);
     const [newArranger, setNewArranger] = useState(arranger);
+    const [newSoloist, setNewSoloist] = useState(soloist);
+    const [newArtist, setNewArtist] = useState(artist);
     const [newRetired, setNewRetired] = useState(retired);
 
     const saveSong = async () => {
@@ -39,11 +41,20 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
             var imgURL = await getDownloadURL(snapshot.ref);
         }
 
+        try {
+            var soloList = newSoloist.split(",");
+        }
+        catch {
+            var soloList = newSoloist;
+        }
+
         await setDoc(doc(colRef, id), {
             title: newTitle,
             photo: imgURL,
             introduced: newIntroduced,
             arranger: newArranger,
+            soloist: soloList,
+            artist: newArtist,
             retired: newRetired,
         }).then(() => {
             setLoading(false);
@@ -97,9 +108,21 @@ function Song({ title, photo, introduced, arranger, retired, id }) {
                         />
                         <input
                             type="text"
+                            placeholder='Artist'
+                            value={newArtist}
+                            onChange={(e) => setNewArtist(e.target.value)}
+                        />
+                        <input
+                            type="text"
                             placeholder='Arranger'
                             value={newArranger}
                             onChange={(e) => setNewArranger(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Soloist(s)'
+                            value={newSoloist}
+                            onChange={(e) => setNewSoloist(e.target.value)}
                         />
                         <input
                             type="text"
@@ -165,7 +188,9 @@ export default function ManageRepertoire() {
                                     title={rep.title}
                                     photo={rep.photo}
                                     introduced={rep.introduced}
+                                    artist={rep.artist}
                                     arranger={rep.arranger}
+                                    soloist={rep.soloist}
                                     retired={rep.retired}
                                 />
                             );
@@ -182,6 +207,7 @@ export default function ManageRepertoire() {
                                     photo={rep.photo}
                                     introduced={rep.introduced}
                                     arranger={rep.arranger}
+                                    soloist={rep.soloist}
                                     retired={rep.retired}
                                 />
                             );

@@ -16,7 +16,9 @@ export default function AddRepertoire() {
     const [title, setTitle] = useState("");
     const [photo, setPhoto] = useState(null);
     const [introduced, setIntroduced] = useState("");
+    const [artist, setArtist] = useState("");
     const [arranger, setArranger] = useState("");
+    const [soloist, setSoloist] = useState([""]);
     const [retired, setRetired] = useState(null);
 
     const addSong = async () => {
@@ -24,14 +26,17 @@ export default function AddRepertoire() {
 
         const isRetired = retired === 'on' ? true : false;
 
+        const soloistList = soloist === "" ? [] : soloist.split(",");
+
         const colRef = collection(firestore_db, 'rep');
         await addDoc(colRef, {
             title: title,
             introduced: introduced,
+            artist: artist,
             arranger: arranger,
             retired: isRetired,
+            soloist: soloistList,
             photo: "placeholder"
-
         }).then((doc) => {
             const storageRef = ref(storage, `rep/${doc.id}`);
             if (photo === null){
@@ -69,8 +74,13 @@ export default function AddRepertoire() {
                     <input type="text" onChange={(e) => setTitle(e.target.value)} />
                     <p>Introduced</p>
                     <input type="text" onChange={(e) => setIntroduced(e.target.value)} />
+                    <p>Artist</p>
+                    <input type="text" onChange={(e) => setArtist(e.target.value)} />
                     <p>Arranger</p>
                     <input type="text" onChange={(e) => setArranger(e.target.value)} />
+                    <p>Soloist</p>
+                    <p style={{fontWeight: 'bold', textAlign: "center"}}>Seperate each soloist with a comma (Ex: Soloist 1,Soloist2,Soloist3)</p>
+                    <input type="text" onChange={(e) => setSoloist(e.target.value)} />
                     <p>Retired</p>
                     <input type="checkbox" onChange={(e) => setRetired(e.target.checked)} />
                     <button onClick={addSong}>Add Song</button>

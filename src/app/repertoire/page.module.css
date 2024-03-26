@@ -46,6 +46,15 @@
     line-break: auto;
 }
 
+.retired {
+    text-align: center;
+    color: white;
+    font-family: Quicksand;
+    max-width: 100%;
+    line-break: auto;
+
+}
+
 @media screen and (min-width: 600px) {
     .song {
         width: 42.5vw;

@@ -63,18 +63,15 @@ export default function Repertoire() {
             </div>
 
             <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1>
-            <div className={styles.currentrep} style={{marginTop: '20px', marginBottom: '30px'}}>
+            <div className={styles.retired} style={{marginTop: '20px', marginBottom: '30px'}}>
                 {retired.map((rep) => {
                     return ( 
-                        <>
-                            <div className={styles.retired}>
+                            <div key='' className={styles.retired}>
                                 <span style={{fontSize: '20px', textAlign: 'center', fontWeight: 'bold', fontFamily: 'Quicksand'}}>
                                     {rep.title}
                                 </span>
                                 <span>: Introduced in&nbsp;{rep.introduced}, arranged by {rep.arranger} </span>
-                                <br/>
                             </div>
-                        </>
                     )
                 })}
             </div>

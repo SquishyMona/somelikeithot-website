@@ -61,7 +61,6 @@ export default function Repertoire() {
                     arranger={rep.arranger} />
                 })}
             </div>
-
             <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1><br/>
             <div class={styles.pastrep}>
             {retired.map((rep) => {
@@ -70,7 +69,6 @@ export default function Repertoire() {
                             <div className={styles.pastrep}>
                                 <p>{rep.title} by {rep.artist}: {rep.soloist}</p>
                             </div>
-                        </>
                     )
                 })}
                 <p>Traitor by Olivia Rodrigo: Emma</p>

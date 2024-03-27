@@ -77,6 +77,13 @@
     margin: 15px;
 }
 
+.actions h3 {
+    color: white;
+    font-family: Quicksand;
+    font-size: 25px;
+    margin: 20px;
+}
+
 .actions button {
     width: 200px;
     height: 50px;

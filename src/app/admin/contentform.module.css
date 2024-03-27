@@ -15,6 +15,7 @@
 
 .contentForm p {
     margin: 10px;
+    color: white;
 }
 
 .contentForm button {
@@ -27,6 +28,7 @@
     font-weight: bold;
     cursor: pointer;
     min-width: 120px;
+    color: white;
 }
 
 .inputField {

@@ -12,6 +12,7 @@
     text-align: center;
     margin: 40px;
     font-family: Quicksand;
+    color: white;
 }
 
 .manageForm button {
@@ -22,6 +23,7 @@
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+    color: white;
 }
 
 .container {

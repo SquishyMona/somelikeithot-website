@@ -15,10 +15,16 @@
 
 .event h2 {
     font-size: 40px;
+    color: white;
+}
+
+.event h3 {
+    color: white;
 }
 
 .details p {
     font-size: 20px;
+    color: white;
 }
 
 .event img {

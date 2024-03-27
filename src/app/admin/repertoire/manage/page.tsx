@@ -206,6 +206,7 @@ export default function ManageRepertoire() {
                                     title={rep.title}
                                     photo={rep.photo}
                                     introduced={rep.introduced}
+                                    artist={rep.artist}
                                     arranger={rep.arranger}
                                     soloist={rep.soloist}
                                     retired={rep.retired}

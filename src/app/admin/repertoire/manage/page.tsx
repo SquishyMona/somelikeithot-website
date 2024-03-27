@@ -10,11 +10,10 @@ import { useRouter } from 'next/navigation'
 import { AuthContext, useAuthContext } from '@/context/authcontext'
 import { BarLoader } from 'react-spinners';
 import styles from '@/app/admin/manageform.module.css'
-import { set } from 'firebase/database';
 
 const dbInstance = collection(firestore_db, "rep");
 
-function Song({ title, photo, introduced, artist, arranger, soloist, retired, id }) {
+function Song({ title, photo, introduced, artist, arranger, soloist, retired, videoURL, id }) {
     const [loading, setLoading] = useState(false);
 
     const [newTitle, setNewTitle] = useState(title);
@@ -24,6 +23,7 @@ function Song({ title, photo, introduced, artist, arranger, soloist, retired, id
     const [newSoloist, setNewSoloist] = useState(soloist);
     const [newArtist, setNewArtist] = useState(artist);
     const [newRetired, setNewRetired] = useState(retired);
+    const [newVideoURL, setNewVideoURL] = useState(videoURL);
 
     const saveSong = async () => {
         setLoading(true);
@@ -56,6 +56,7 @@ function Song({ title, photo, introduced, artist, arranger, soloist, retired, id
             soloist: soloList,
             artist: newArtist,
             retired: newRetired,
+            videoURL: newVideoURL,
         }).then(() => {
             setLoading(false);
         });
@@ -130,6 +131,12 @@ function Song({ title, photo, introduced, artist, arranger, soloist, retired, id
                             value={newIntroduced}
                             onChange={(e) => setNewIntroduced(e.target.value)}
                         />
+                        <input
+                            type="text"
+                            placeholder='Music Video URL'
+                            value={newVideoURL}
+                            onChange={(e) => setNewVideoURL(e.target.value)}
+                        />
                         <div className={styles.actions}>
                             <button onClick={saveSong}>Save</button>
                             <button onClick={deleteSong}>Delete</button>
@@ -192,6 +199,7 @@ export default function ManageRepertoire() {
                                     arranger={rep.arranger}
                                     soloist={rep.soloist}
                                     retired={rep.retired}
+                                    videoURL={rep.videoURL}
                                 />
                             );
                         })}
@@ -210,6 +218,7 @@ export default function ManageRepertoire() {
                                     arranger={rep.arranger}
                                     soloist={rep.soloist}
                                     retired={rep.retired}
+                                    videoURL={rep.videoURL}
                                 />
                             );
                         })}

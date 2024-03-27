@@ -9,10 +9,12 @@ import styles from './page.module.css'
 
 const dbInstance = collection(firestore_db, 'rep');
 
-function Song({title, introduced, arranger, photo}) {
+function Song({title, introduced, arranger, photo, videoURL}) {
     return (
         <div className={styles.rep}>
-            <img className={styles.song} src={photo} />
+            <a href={videoURL} target='_blank'>
+                <img className={styles.song} src={photo} />
+            </a>
             <h2>{title}</h2><br/>
             <h3>Introduced in {introduced}</h3>
             <h3>Arranged by {arranger}</h3>
@@ -58,7 +60,8 @@ export default function Repertoire() {
                     photo={rep.photo}
                     title={rep.title}
                     introduced={rep.introduced}
-                    arranger={rep.arranger} />
+                    arranger={rep.arranger}
+                    videoURL={rep.videoURL} />
                 })}
             </div>
             <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1><br/>
@@ -69,6 +72,7 @@ export default function Repertoire() {
                             <div className={styles.pastrep}>
                                 <p>{rep.title} by {rep.artist}: {rep.soloist}</p>
                             </div>
+                        </>
                     )
                 })}
                 <p>Traitor by Olivia Rodrigo: Emma</p>

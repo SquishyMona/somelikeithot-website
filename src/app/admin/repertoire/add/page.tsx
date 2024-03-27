@@ -19,6 +19,7 @@ export default function AddRepertoire() {
     const [artist, setArtist] = useState("");
     const [arranger, setArranger] = useState("");
     const [soloist, setSoloist] = useState([""]);
+    const [videoURL, setVideoURL] = useState("");
     const [retired, setRetired] = useState(null);
 
     const addSong = async () => {
@@ -36,6 +37,7 @@ export default function AddRepertoire() {
             arranger: arranger,
             retired: isRetired,
             soloist: soloistList,
+            videoURL: videoURL,
             photo: "placeholder"
         }).then((doc) => {
             const storageRef = ref(storage, `rep/${doc.id}`);
@@ -81,6 +83,9 @@ export default function AddRepertoire() {
                     <p>Soloist</p>
                     <p style={{fontWeight: 'bold', textAlign: "center"}}>Seperate each soloist with a comma (Ex: Soloist 1,Soloist2,Soloist3)</p>
                     <input type="text" onChange={(e) => setSoloist(e.target.value)} />
+                    <p>Music Video URL</p>
+                    <p style={{fontWeight: 'bold', textAlign: "center"}}>Optional: Will make the photo link to the URL provided</p>
+                    <input type="text" onChange={(e) => setVideoURL(e.target.value)} />
                     <p>Retired</p>
                     <input type="checkbox" onChange={(e) => setRetired(e.target.checked)} />
                     <button onClick={addSong}>Add Song</button>

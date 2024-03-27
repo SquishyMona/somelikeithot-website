@@ -67,10 +67,20 @@ export default function Repertoire() {
             <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1><br/>
             <div class={styles.pastrep}>
             {retired.map((rep) => {
+                var soloistString = "";
+                if (rep.soloist.length > 1) {
+                    rep.soloist.forEach(soloist => {
+                        soloistString += soloist + ", ";
+                    })
+                    soloistString = soloistString.slice(0, -2);
+                }
+                else {
+                    soloistString = rep.soloist;
+                }
                     return ( 
                         <>
                             <div className={styles.pastrep}>
-                                <p>{rep.title} by {rep.artist}: {rep.soloist}</p>
+                                <p>{rep.title} by {rep.artist}: {soloistString}</p>
                             </div>
                         </>
                     )

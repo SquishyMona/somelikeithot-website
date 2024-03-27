@@ -77,14 +77,14 @@ export default function Repertoire() {
                 else {
                     soloistString = rep.soloist;
                 }
-                    return ( 
-                        <>
-                            <div className={styles.pastrep}>
-                                <p>{rep.title} by {rep.artist}: {soloistString}</p>
-                            </div>
-                        </>
-                    )
-                })}
+                return ( 
+                    <>
+                        <div className={styles.pastrep}>
+                            <p>{rep.title} by {rep.artist}: {soloistString}</p>
+                        </div>
+                    </>
+                )})
+            }
                 <p>Traitor by Olivia Rodrigo: Emma</p>
                 <p>Rumor Has It by Adele: Alli</p>
                 <p>Boys Like You By dodie: Jenna</p>

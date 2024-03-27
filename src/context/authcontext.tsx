@@ -32,7 +32,12 @@ export const AuthContextProvider = ({ children }: any) => {
     
     return (
         <AuthContext.Provider value={{ user }}>
-            { loading ? <BarLoader /> : children}
+            { loading ? 
+                <div style={{display: "flex", justifyContent: "center", marginTop: "50vh", flexDirection: "column", alignItems: "center"}}>
+                    <BarLoader height='6px' width='200px'/>
+                </div> 
+                : children
+            }
         </AuthContext.Provider>
     );
 }

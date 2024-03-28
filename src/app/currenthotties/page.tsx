@@ -31,10 +31,12 @@ function Hottie({ name, joinyear, photo, solos }) {
     )
 }
 
-function Eboard({ name, joinyear, photo, solos, eboard }) {
+function Eboard({ name, joinyear, photo, solos, eboard, id }) {
     return (
         <div className={styles.hottie}>
-            <img src={photo}></img>
+            <a href={`/currenthotties/${id}`}>
+                <img src={photo}></img>
+            </a>
             <div className={styles.details}>
                 <h2>{name}</h2>
                 <p className={styles.eboard}>{eboard}</p>
@@ -99,7 +101,8 @@ export default function CurrentHotties() {
                         joinyear={hottie.joinyear}
                         photo={hottie.photo}
                         solos={hottie.solos}
-                        eboard={hottie.eboard} />
+                        eboard={hottie.eboard}
+                        id={hottie.id} />
                     })}
             </div>
             <h1 className='category' style={{marginTop: '20px'}}>Members</h1>

@@ -1,0 +1,72 @@
+.eboardPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.photo {
+    height: 50vh;
+    margin: 20px;
+}
+
+.eboardPage h1 {
+    color: white;
+    font-family: Quicksand;
+    font-size: 40px;
+    margin: 20px;
+    text-align: center;
+}
+
+.eboardPage h2 {
+    color: rgb(232, 56, 43);
+    font-family: Quicksand;
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+.eboardPage p {
+    color: white;
+    font-family: Quicksand;
+    font-size: 20px;
+    margin: 20px;
+    text-align: center;
+    max-width: 500px;
+}
+
+.eboardPage details {
+    display: flex;
+    flex-direction: column;
+}
+
+.socialicon {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 900px) {
+    .photo {
+        height: 60vh;
+    }
+
+    .eboardPage {
+        flex-direction: row;
+    }
+
+    .eboardPage h1 {
+        font-size: 40px;
+    }
+
+    .eboardPage p {
+        font-size: 20px;
+    }
+}

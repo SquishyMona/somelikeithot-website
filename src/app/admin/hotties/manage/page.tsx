@@ -11,7 +11,7 @@ import { AuthContext, useAuthContext } from '@/context/authcontext'
 import { BarLoader } from 'react-spinners';
 import styles from '@/app/admin/manageform.module.css'
 
-function Hottie({name, position, img, solos, joined, alumni, id}) {
+function Hottie({name, position, img, solos, joined, alumni, bio, tiktok, instagram, id}) {
     const router = useRouter();
     const hottieID = id;
 
@@ -23,6 +23,9 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
     const [newSolos, setNewSolos] = useState(solos);
     const [newJoined, setNewJoined] = useState(joined);
     const [newAlumni, setNewAlumni] = useState(alumni);
+    const [newTikTok, setNewTikTok] = useState(tiktok);
+    const [newBio, setNewBio] = useState(bio);
+    const [newInstagram, setNewInstagram] = useState(instagram);
 
 
     const saveHottie = async () => {
@@ -45,7 +48,10 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
                 solos: soloList,
                 joinyear: newJoined,
                 alumni: newAlumni,
-                photo: imgURL
+                photo: imgURL,
+                bio: newBio,
+                tiktok: newTikTok,
+                instagram: newInstagram
             }, { merge: true }).then(() => {
                 setLoading(false);
             });
@@ -60,7 +66,10 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
                         solos: soloList,
                         joinyear: newJoined,
                         alumni: newAlumni,
-                        photo: imgURL
+                        photo: imgURL,
+                        bio: newBio,
+                        tiktok: newTikTok,
+                        instagram: newInstagram
                     }, { merge: true }).then(() => {
                         img = imgURL;
                         setLoading(false);
@@ -101,6 +110,14 @@ function Hottie({name, position, img, solos, joined, alumni, id}) {
                     <input type="text" placeholder={'Solos'} value={newSolos} onChange={(e) => setNewSolos(e.target.value)} />
                     <p style={{textAlign: 'center'}}>Seperate each solo with a comma (Ex: Solo1,Solo 2,Solo3)</p>
                     <input type="text" placeholder={'Eboard Position'} value={newPosition} onChange={(e) => setNewPosition(e.target.value)} />
+                    { position != '' ? 
+                        <>
+                            <input type="text" placeholder='TikTok Username' value={newTikTok} onChange={(e) => setNewTikTok(e.target.value)} />
+                            <input type="text" placeholder='Instagram Username' value={newInstagram} onChange={(e) => setNewInstagram(e.target.value)} />
+                            <textarea placeholder='Bio' value={newBio} onChange={(e) => setNewBio(e.target.value)} />
+                        </>
+                        : null
+                    }
                     <div className={styles.actions}>
                         <button onClick={saveHottie}>Save</button>
                         <button onClick={deleteHottie}>Delete</button>
@@ -188,6 +205,9 @@ export default function Manage() {
                         solos={hottie.solos} 
                         joined={hottie.joinyear} 
                         alumni={hottie.alumni}
+                        bio={hottie.bio}
+                        tiktok={hottie.tiktok}
+                        instagram={hottie.instagram}
                         id={hottie.id} />
                     })}
                 </div>
@@ -202,6 +222,9 @@ export default function Manage() {
                         solos={hottie.solos} 
                         joined={hottie.joinyear} 
                         alumni={hottie.alumni}
+                        bio={hottie.bio}
+                        tiktok={hottie.tiktok}
+                        instagram={hottie.instagram}
                         id={hottie.id} />
                     })}
                 </div>
@@ -216,6 +239,9 @@ export default function Manage() {
                         solos={hottie.solos} 
                         joined={hottie.joinyear} 
                         alumni={hottie.alumni}
+                        bio={hottie.bio}
+                        tiktok={hottie.tiktok}
+                        instagram={hottie.instagram}
                         id={hottie.id} />
                     })}
                 </div>

@@ -29,6 +29,36 @@ function Hottie({name, position, img, solos, joined, alumni, bio, tiktok, instag
 
 
     const saveHottie = async () => {
+        var sortNum;
+        if (eboard === "") {
+            sortNum = 9;
+        }
+        else {
+            if (eboard === "President") {
+                sortNum = 1;
+            }
+            if (eboard === "Vice President") {
+                sortNum = 2;
+            }
+            if (eboard === "Music Director") {
+                sortNum = 3;
+            }
+            if (eboard === "Assistant Music Director") {
+                sortNum = 4;
+            }
+            if (eboard === "Secretary") {
+                sortNum = 5;
+            }
+            if (eboard === "Treasurer") {
+                sortNum = 6;
+            }
+            if (eboard === "Social Chair") {
+                sortNum = 7;
+            }
+            if (eboard === "Marketing Chair") {
+                sortNum = 8;
+            }
+        }
         setLoading(true);
         const colRef = collection(firestore_db, 'slihsters');
         const storageRef = getStorage(firebase_app);
@@ -48,6 +78,7 @@ function Hottie({name, position, img, solos, joined, alumni, bio, tiktok, instag
                 solos: soloList,
                 joinyear: newJoined,
                 alumni: newAlumni,
+                priority: sortNum,
                 photo: imgURL,
                 bio: newBio,
                 tiktok: newTikTok,
@@ -66,6 +97,7 @@ function Hottie({name, position, img, solos, joined, alumni, bio, tiktok, instag
                         solos: soloList,
                         joinyear: newJoined,
                         alumni: newAlumni,
+                        priority: sortNum,
                         photo: imgURL,
                         bio: newBio,
                         tiktok: newTikTok,

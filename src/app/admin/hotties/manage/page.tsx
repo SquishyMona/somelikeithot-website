@@ -30,32 +30,32 @@ function Hottie({name, position, img, solos, joined, alumni, bio, tiktok, instag
 
     const saveHottie = async () => {
         var sortNum;
-        if (eboard === "") {
+        if (newPosition === "") {
             sortNum = 9;
         }
         else {
-            if (eboard === "President") {
+            if (newPosition === "President") {
                 sortNum = 1;
             }
-            if (eboard === "Vice President") {
+            if (newPosition === "Vice President") {
                 sortNum = 2;
             }
-            if (eboard === "Music Director") {
+            if (newPosition === "Music Director") {
                 sortNum = 3;
             }
-            if (eboard === "Assistant Music Director") {
+            if (newPosition === "Assistant Music Director") {
                 sortNum = 4;
             }
-            if (eboard === "Secretary") {
+            if (newPosition === "Secretary") {
                 sortNum = 5;
             }
-            if (eboard === "Treasurer") {
+            if (newPosition === "Treasurer") {
                 sortNum = 6;
             }
-            if (eboard === "Social Chair") {
+            if (newPosition === "Social Chair") {
                 sortNum = 7;
             }
-            if (eboard === "Marketing Chair") {
+            if (newPosition === "Marketing Chair") {
                 sortNum = 8;
             }
         }

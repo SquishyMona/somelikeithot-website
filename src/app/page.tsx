@@ -5,7 +5,7 @@ export default async function Home() {
 	const ref = collection(firestore_db, "slides");
 	const q = query(ref, orderBy("slidenum"));
 	const docs = await getDocs(q)
-	const slides = docs.docs.map((doc) => {
+	const slides: any = docs.docs.map((doc) => {
 		return {...doc.data(), id: doc.id}
 	})
 

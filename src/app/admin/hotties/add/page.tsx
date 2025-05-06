@@ -62,6 +62,9 @@ export default function AddHottie() {
             alumni: isAlumni,
             photo: "Images/logo.png",
             priority: sortNum,
+            bio: "",
+            tiktok: "",
+            instagram: "",
             alumniTime: new Date(Date.now()),
             joinTime: new Date(Date.now())
         }).then((doc) => {

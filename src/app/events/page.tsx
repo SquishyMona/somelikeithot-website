@@ -1,8 +1,5 @@
 // @ts-nocheck
 
-"use client";
-
-import { useState, useEffect } from 'react'
 import { getDocs, collection } from 'firebase/firestore'
 import { firestore_db } from '@/firebase/config'
 import styles from './page.module.css'
@@ -24,18 +21,11 @@ function Event({title, time, location, description, livelink, img}) {
     )
 }
 
-export default function Events() {
-    const [events, setEvents] = useState<{ id: string; }[]>([]);
-    const getEvents = async () => {
-        getDocs(dbInstance).then((data) => {
-            setEvents(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        })
-    }
-    useEffect(() => {
-        getEvents();
-    }, []);
+export default async function Events() {
+	const docs = await getDocs(dbInstance)
+	const events = docs.docs.map((doc) => {
+		return {...doc.data(), id: doc.id}
+	})
 
     return (
         <>

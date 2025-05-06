@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react";
 import { getDoc, doc } from "firebase/firestore"
 import { firestore_db } from "@/firebase/config"
 import styles from "./page.module.css"
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const [hottie, setHottie] = useState(null)
 
   useEffect(() => {

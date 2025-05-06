@@ -1,8 +1,5 @@
 // @ts-nocheck
 
-"use client";
-
-import { useState, useEffect } from "react";
 import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { firestore_db } from "@/firebase/config";
 import styles from "./page.module.css";
@@ -23,7 +20,7 @@ function Hottie({ name, joinyear, photo, solos }) {
                         : null
                 }
                 {solos.map((solo: any) => {
-                    return <p key={solo.id}>{solo}<br/></p>
+                    return <p key={solo}>{solo}<br/></p>
                 }
                 )}
             </div>
@@ -48,7 +45,7 @@ function Eboard({ name, joinyear, photo, solos, eboard, id }) {
                         : null
                 }
                 {solos.map((solo: any) => {
-                    return <p key={solo.id}>{solo}<br/></p>
+                    return <p key={solo}>{solo}<br/></p>
                 }
                 )}
             </div>
@@ -56,32 +53,18 @@ function Eboard({ name, joinyear, photo, solos, eboard, id }) {
     )
 }
 
-export default function CurrentHotties() {
-    const [hotties, setHotties] = useState<{ id: string; }[]>([]);
-    const [eboard, setEboard] = useState<{ id: string; }[]>([]);
-
+export default async function CurrentHotties() {
     const hottieQuery = query(dbInstance, where('joinTime', '!=', null), where('eboard', '==', ''), where('alumni', '==', false), orderBy('joinTime'));
-    const getHotties = async () => {
-        getDocs(hottieQuery).then((data) => {
-            setHotties(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        })
-    }
+	const hottieDocs = await getDocs(hottieQuery)
+	const hotties = hottieDocs.docs.map((doc) => {
+		return {...doc.data(), id: doc.id}
+	})
 
     const eboardQuery = query(dbInstance, where('priority', '!=', 9), where('alumni', '==', false), orderBy('priority'));
-    const getEboard = async () => {
-        getDocs(eboardQuery).then((data) => {
-            setEboard(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        })
-    }
-
-    useEffect(() => {
-        getHotties();
-        getEboard();
-    }, []);
+	const eboardDocs = await getDocs(eboardQuery)
+	const eboard = eboardDocs.docs.map((doc) => {
+		return {...doc.data(), id: doc.id}
+	})
 
     return (
         <>

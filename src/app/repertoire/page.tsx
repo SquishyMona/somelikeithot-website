@@ -1,8 +1,5 @@
 // @ts-nocheck
-
-"use client";
-
-import { useState, useEffect } from 'react'
+import { Fragment } from 'react';
 import { getDocs, collection, query, where } from 'firebase/firestore'
 import { firestore_db } from '@/firebase/config'
 import styles from './page.module.css'
@@ -22,30 +19,18 @@ function Song({title, introduced, arranger, photo, videoURL}) {
     )
 }
 
-export default function Repertoire() {
-    const [rep, setRep] = useState<{ id: string; }[]>([]);
-    const [retired, setRetired] = useState<{ id: string; }[]>([]);
-    const getRep = async () => {
-        const q = query(dbInstance, where("retired", "==", false));
-        getDocs(q).then((data) => {
-            setRep(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        })
-    }
+export default async function Repertoire() {
+    const repQuery = query(dbInstance, where("retired", "==", false));
+	const repDocs = await getDocs(repQuery)
+	const rep = repDocs.docs.map((doc) => {
+		return {...doc.data(), id: doc.id}
+	})
 
-    const getRetired = async () => {
-        const q = query(dbInstance, where("retired", "==", true));
-        getDocs(q).then((data) => {
-            setRetired(data.docs.map((doc) => {
-                return {...doc.data(), id: doc.id}
-            }));
-        })
-    }
-    useEffect(() => {
-        getRep();
-        getRetired();
-    }, []);
+    const retiredQuery = query(dbInstance, where("retired", "==", true));
+	const retiredDocs = await getDocs(retiredQuery)
+	const retired = retiredDocs.docs.map((doc) => {
+		return {...doc.data(), id: doc.id}
+	})
 
     return (
         <>
@@ -56,7 +41,7 @@ export default function Repertoire() {
             <div className={styles.currentrep}>
                 {rep.map((rep) => {
                     return <Song 
-                    key={rep.id}
+                    key={rep.title}
                     photo={rep.photo}
                     title={rep.title}
                     introduced={rep.introduced}
@@ -65,7 +50,7 @@ export default function Repertoire() {
                 })}
             </div>
             <h1 className="category" style={{marginTop: '50px'}}>Retired Songs</h1><br/>
-            <div class={styles.pastrep}>
+            <div className={styles.pastrep}>
             {retired.map((rep) => {
                 var soloistString = "";
                 if (rep.soloist.length > 1) {
@@ -78,11 +63,11 @@ export default function Repertoire() {
                     soloistString = rep.soloist;
                 }
                 return ( 
-                    <>
+                    <Fragment key={rep.title}>
                         <div className={styles.pastrep}>
                             <p>{rep.title} by {rep.artist}: {soloistString}</p>
                         </div>
-                    </>
+                    </Fragment>
                 )})
             }
                 <p>Traitor by Olivia Rodrigo: Emma</p>
